@@ -4,6 +4,8 @@ export default async function ProjectList() {
   const data = await fetch("http://localhost:3001/repos");
   const repos = await data.json();
 
+  throw new Error("💣 I'm broken!");
+
   return (
     <div className="mt-4 text-lg text-gray-500 dark:text-gray-400">
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
