@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Card from "@/components/Card";
 
-export default function Home() {
+export default function Home({ searchParams }) {
   const [isVisible, setIsVisible] = useState(true);
   const [names, setNames] = useState(["Damian", "Ajani", "Sorin"]);
+
   const name = "Damian";
   const handleClick = () => {
     setIsVisible(!isVisible);
@@ -15,6 +16,9 @@ export default function Home() {
   };
   const cards =
     isVisible && names.map((name, index) => <Card key={index}>{name}</Card>);
+
+  if (searchParams.error) throw new Error("This is an error on the main Page!");
+
   return (
     <div className="space-y-4">
       <div>Hello, {name}</div>

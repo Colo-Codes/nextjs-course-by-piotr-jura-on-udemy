@@ -24,6 +24,8 @@ if (process.browser) {
   console.log(">>> 🍎 app/layout (server component) - on SERVER side");
 }
 
+// throw new Error("Error at the top!");
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

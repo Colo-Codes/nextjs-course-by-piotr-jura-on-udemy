@@ -1,6 +1,10 @@
 import Link from "next/link";
 
 export default function AboutPage() {
+  const randomNumber = Math.random();
+  console.log(randomNumber);
+  if (randomNumber > 0.5) throw new Error("Error in About page!!");
+
   return (
     <div className="flex flex-col">
       <h1 className="text-3xl font-bold tracking-tight">About</h1>
