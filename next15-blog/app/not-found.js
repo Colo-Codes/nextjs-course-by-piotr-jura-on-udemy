@@ -55,7 +55,8 @@ export default function NotFound() {
         </div>
 
         <p className="text-gray-400 italic">
-          "Looks like our page is having an explosive identity crisis!"
+          &quot;Looks like our page is having an explosive identity
+          crisis!&quot;
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
