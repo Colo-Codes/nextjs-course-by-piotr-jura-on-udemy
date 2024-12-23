@@ -1,5 +1,28 @@
 import { notFound } from "next/navigation";
 
+const titles = {
+  first: "Hello first!",
+  second: "Hello second!",
+};
+
+export async function generateMetadata({ params, searchParams }, parent) {
+  // // read route params
+  // const { slug } = await params
+
+  let description = (await parent).description ?? "Default description";
+
+  // // fetch data
+  // const product = await fetch(`https://.../${id}`).then((res) => res.json());
+
+  // // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: titles[params.slug],
+    description: description,
+  };
+}
+
 export default function BlogPostPage({ params }) {
   if (!["first", "second"].includes(params.slug)) {
     notFound();

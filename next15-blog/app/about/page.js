@@ -1,5 +1,9 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "About",
+};
+
 export default function AboutPage() {
   const randomNumber = Math.random();
   console.log(randomNumber);
@@ -8,7 +12,7 @@ export default function AboutPage() {
   return (
     <div className="flex flex-col">
       <h1 className="text-3xl font-bold tracking-tight">About</h1>
-      <p>
+      <p className="font-light">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
         Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies
         sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius

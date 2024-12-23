@@ -4,6 +4,10 @@ import { Suspense } from "react";
 import ProjectList from "@/components/ProjectList";
 import { ErrorBoundary } from "react-error-boundary";
 
+export const metadata = {
+  title: "Projects",
+};
+
 export default async function ProjectsPage() {
   return (
     <div className="flex flex-col">
