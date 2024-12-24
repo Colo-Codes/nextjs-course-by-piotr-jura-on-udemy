@@ -6,11 +6,6 @@ export default function Navigation() {
     <nav className="container flex items-center justify-between font-mono max-w-fit">
       <ul className="flex flex-col md:flex-row gap-4">
         <li>
-          <Link href="/" className={styles.link}>
-            Home
-          </Link>
-        </li>
-        <li>
           <Link href="/about" className={styles.link}>
             About
           </Link>
@@ -23,6 +18,11 @@ export default function Navigation() {
         <li>
           <Link href="/photos" className={styles.link}>
             Photos
+          </Link>
+        </li>
+        <li>
+          <Link href="/blog" className={styles.link}>
+            Blog
           </Link>
         </li>
       </ul>
