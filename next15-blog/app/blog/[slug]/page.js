@@ -1,4 +1,7 @@
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import fs from "fs";
+import path from "path";
 
 const titles = {
   first: "Hello first!",
@@ -6,34 +9,36 @@ const titles = {
 };
 
 export async function generateMetadata({ params, searchParams }, parent) {
-  // // read route params
-  // const { slug } = await params
+  const { slug } = await params;
 
   let description = (await parent).description ?? "Default description";
 
-  // // fetch data
-  // const product = await fetch(`https://.../${id}`).then((res) => res.json());
-
-  // // optionally access and extend (rather than replace) parent metadata
-  // const previousImages = (await parent).openGraph?.images || [];
-
   return {
-    title: titles[params.slug],
+    title: titles[slug],
     description: description,
   };
 }
 
-export default function BlogPostPage({ params }) {
-  if (!["first", "second"].includes(params.slug)) {
+export default async function BlogPostPage({ params }) {
+  const { slug } = await params;
+  if (!["first", "second"].includes(slug)) {
     notFound();
   }
+
+  const markdown = fs.readFileSync(
+    path.join(process.cwd(), `content/${slug}.mdx`),
+    "utf8"
+  );
 
   return (
     <div className="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
         Blog Post
       </h1>
-      <p>Slug: {params.slug}</p>
+      <p className="mb-8">Slug: {slug}</p>
+      <article className="prose dark:prose-invert max-w-none w-full">
+        <MDXRemote source={markdown} />
+      </article>
     </div>
   );
 }
