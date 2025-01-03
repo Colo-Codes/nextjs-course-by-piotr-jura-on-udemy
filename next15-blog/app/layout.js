@@ -25,16 +25,7 @@ export const metadata = {
     template: "%s | Damian Demasi",
     default: "Damian Demasi",
   },
-  // description: "Damian Demasi's portfolio",
 };
-
-if (process.browser) {
-  console.log(">>> 🍏 app/layout (server component) - on CLIENT side");
-} else {
-  console.log(">>> 🍎 app/layout (server component) - on SERVER side");
-}
-
-console.log(">>> Main layout loaded", new Date());
 
 export default function RootLayout({ children }) {
   return (

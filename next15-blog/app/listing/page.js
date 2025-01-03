@@ -1,10 +1,4 @@
 export default function ListingPage() {
-  if (process.browser) {
-    console.log(">>> 🍏 app/listing/page (server component) - on CLIENT side");
-  } else {
-    console.log(">>> 🍎 app/listing/page (server component) - on SERVER side");
-  }
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
       <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
