@@ -30,37 +30,36 @@ export async function getPosts({
   const posts = await Promise.all(
     files.map(async (filename) => {
       const { frontmatter } = await getPost(filename);
-
       return {
-        frontmatter,
+        frontmatter: frontmatter || {},
         slug: filename.replace(".mdx", ""),
       };
     })
   );
 
-  // Filter by tags
-  console.log(">>> tags from posts.js", tags, "posts", posts);
+  let filteredPosts = [...posts];
+
+  // Filter by tags if any are specified
   if (tags.length > 0) {
-    return posts.filter((post) => {
-      console.log(">>> post.frontmatter.tags", post.frontmatter.tags);
-      return tags.every((tag) => post.frontmatter.tags?.includes(tag));
+    filteredPosts = posts.filter((post) => {
+      const postTags = post.frontmatter.tags || [];
+      return tags.some((tag) => postTags.includes(tag));
     });
   }
 
-  posts.sort((a, b) => {
+  // Sort posts
+  filteredPosts.sort((a, b) => {
     if (newest) {
       return new Date(b.frontmatter.date) - new Date(a.frontmatter.date);
     }
-
     return new Date(a.frontmatter.date) - new Date(b.frontmatter.date);
   });
 
-  const startIndex = (page - 1) * limit; // 0
-  const endIndex = page * limit; // 2
+  const startIndex = (page - 1) * limit;
+  const endIndex = page * limit;
 
-  // Return all posts if no filter is applied
   return {
-    posts: posts.slice(startIndex, endIndex),
-    pageCount: Math.ceil(posts.length / limit),
+    posts: filteredPosts.slice(startIndex, endIndex),
+    pageCount: Math.ceil(filteredPosts.length / limit),
   };
 }

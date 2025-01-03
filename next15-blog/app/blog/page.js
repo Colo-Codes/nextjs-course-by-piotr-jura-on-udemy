@@ -4,7 +4,7 @@ import Pagination from "@/components/Pagination";
 
 export default async function BlogsPage({ searchParams }) {
   let { tags, page, limit, order } = await searchParams;
-  tags = tags?.split(",");
+  tags = searchParams.tags ? searchParams.tags.split(",") : [];
   page = page ?? 1;
   limit = limit ?? 2;
   order = order ?? "newest";
@@ -30,7 +30,11 @@ export default async function BlogsPage({ searchParams }) {
 
   let tagElements = [
     <li key="all" className="list-none bg-slate-500 px-1 rounded">
-      <Link href="/blog" className="no-underline">
+      <Link
+        href={`/blog?page=${page}&limit=${limit}&order=${order}
+      `}
+        className="no-underline"
+      >
         All
       </Link>
     </li>,
@@ -40,7 +44,10 @@ export default async function BlogsPage({ searchParams }) {
   tagElements.push(
     allTags.map((tag) => (
       <li key={tag} className="list-none bg-slate-500 px-1 rounded">
-        <Link href={`/blog?tags=${tag}`} className="no-underline">
+        <Link
+          href={`/blog?tags=${tag}&page=${page}&limit=${limit}&order=${order}`}
+          className="no-underline"
+        >
           {tag}
         </Link>
       </li>
